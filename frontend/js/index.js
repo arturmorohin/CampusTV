@@ -79,7 +79,7 @@ async function loadTicker() {
       document.body.appendChild(probe);
 
       requestAnimationFrame(() => requestAnimationFrame(() => {
-        const textW  = probe.getBoundingClientRect().width;
+        const textW  = probe.getBoundingClientRect().width + 300;
         document.body.removeChild(probe);
         tickerText.textContent = text;
         tickerTrackW = tickerText.parentElement.getBoundingClientRect().width;
