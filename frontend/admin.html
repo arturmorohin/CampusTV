@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CampusTV | Плейлист</title>
+  <link rel="stylesheet" href="css/admin.css">
+  <link rel="icon" type="image/png" href="./images/logo-black.png">
+</head>
+<body>
+
+<!-- ── LOGIN ── -->
+<div id="login-screen">
+  <div class="login-box">
+    <img class="login-logo-img" src="./images/logo-white.png" alt="Логотип">
+    <div class="login-logo">CampusTV</div>
+    <div class="login-subtitle">Управление плейлистом</div>
+    <div class="login-field">
+      <input type="password" id="password-input" placeholder="Введите пароль" autocomplete="current-password">
+      <button type="button" class="toggle-password-btn" id="toggle-password" tabindex="-1">
+        <!-- eye open -->
+        <svg class="eye-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+          <circle cx="12" cy="12" r="3"/>
+        </svg>
+        <!-- eye off -->
+        <svg class="eye-off-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M17.94 17.94A10.07 10.07 0 0112 20c-7 0-11-8-11-8a18.45 18.45 0 015.06-5.94"/>
+          <path d="M9.9 4.24A9.12 9.12 0 0112 4c7 0 11 8 11 8a18.5 18.5 0 01-2.16 3.19"/>
+          <line x1="1" y1="1" x2="23" y2="23"/>
+        </svg>
+      </button>
+    </div>
+    <div class="login-error" id="login-error"></div>
+    <button class="btn-login" id="btn-login">ВОЙТИ</button>
+  </div>
+</div>
+
+<!-- ── APP ── -->
+<div id="app">
+  <header>
+    <div>
+      <div class="logo">CampusTV</div>
+      <div class="subtitle">Управление плейлистом</div>
+    </div>
+    <div class="header-right">
+      <a href="/index.html" target="_blank" class="btn-header">Открыть стенд</a>
+      <button class="btn-header btn-logout" id="btn-logout">Выйти</button>
+    </div>
+  </header>
+
+  <main>
+    <div class="ticker-section">
+      <div class="ticker-header">
+        <div class="ticker-title">📢 Бегущая строка</div>
+        <label class="toggle" title="Включить/выключить бегущую строку">
+          <input type="checkbox" id="ticker-enabled" checked>
+          <span class="toggle-slider"></span>
+        </label>
+      </div>
+      <div class="ticker-input-wrap">
+        <textarea class="ticker-input" id="ticker-text" rows="5" placeholder="Введите текст бегущей строки..."></textarea>
+        <button class="btn-save-ticker" id="btn-save-ticker">СОХРАНИТЬ</button>
+      </div>
+    </div>
+
+    <div class="upload-zone" id="upload-zone">
+      <input type="file" id="file-input" multiple accept="image/*,video/*">
+      <div class="upload-icon">📁</div>
+      <div class="upload-title">Перетащите файлы или нажмите для выбора</div>
+      <div class="upload-hint">Изображения: JPG, PNG, GIF, WebP · Видео: MP4, WebM, MOV</div>
+      <div class="upload-progress" id="upload-progress">
+        <div class="upload-progress-bar" id="upload-progress-bar"></div>
+      </div>
+    </div>
+
+    <div class="section-header">
+      <div class="section-title">Плейлист</div>
+      <div class="badge" id="count-badge">0 файлов</div>
+    </div>
+    <div id="playlist-list"></div>
+    <div id="empty-state" class="show">
+      <div class="icon">🎬</div>
+      <p>Плейлист пуст — загрузите первый файл выше</p>
+    </div>
+  </main>
+</div>
+
+<div id="toast"></div>
+<script src="js/admin.js"></script>
+</body>
+</html>

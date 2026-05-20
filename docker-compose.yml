@@ -1,0 +1,29 @@
+services:
+
+  backend:
+    build: .
+    container_name: stend-backend
+    environment:
+      # ↓↓↓ ИЗМЕНИТЕ ПАРОЛЬ ЗДЕСЬ ↓↓↓
+      ADMIN_PASSWORD: "Ваш-пароль"
+    volumes:
+      - uploads_data:/app/uploads
+      - playlist_data:/app/data
+    restart: unless-stopped
+
+  nginx:
+    image: nginx:alpine
+    container_name: stend-nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./frontend:/usr/share/nginx/html:ro
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
+      - uploads_data:/app/uploads:ro
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+volumes:
+  uploads_data:
+  playlist_data:

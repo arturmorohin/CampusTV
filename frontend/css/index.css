@@ -1,0 +1,156 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;600;700&display=swap');
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --accent: #E8C547;
+  --bar-h: 52px;
+}
+
+html, body {
+  user-select: none;
+  width: 100%; height: 100%;
+  background: #000;
+  overflow: hidden;
+  font-family: 'Montserrat', sans-serif;
+  cursor: none;
+}
+
+#stage {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  bottom: var(--bar-h);
+}
+
+.slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #000;
+}
+.slide.active { opacity: 1; z-index: 2; }
+.slide img   { width: 100%; height: 100%; object-fit: contain; }
+.slide video { width: 100%; height: 100%; object-fit: contain; background: #000; }
+
+#progress-bar-wrap {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background: rgba(255,255,255,0.12);
+  z-index: 20;
+}
+#progress-bar {
+  height: 100%;
+  background: var(--accent);
+  width: 0%;
+}
+
+#bar {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  height: var(--bar-h);
+  background: var(--accent);
+  z-index: 11;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+#bar-clock {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  padding: 0 20px;
+  flex-shrink: 0;
+  border-right: 2px solid rgba(0,0,0,0.18);
+  height: 100%;
+  background: rgba(0,0,0,0.13);
+}
+
+#bar-time {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.9rem;
+  color: #000;
+  letter-spacing: 3px;
+  line-height: var(--bar-h);
+}
+
+#bar-date {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: rgba(0,0,0,0.6);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  white-space: nowrap;
+}
+
+#ticker-track {
+  flex: 1;
+  overflow: hidden;
+  height: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+#ticker-track::before,
+#ticker-track::after {
+  content: '';
+  position: absolute;
+  top: 0; bottom: 0;
+  width: 60px;
+  z-index: 2;
+  pointer-events: none;
+}
+#ticker-track::before {
+  left: 0;
+  background: linear-gradient(to right, var(--accent), transparent);
+}
+#ticker-track::after {
+  right: 0;
+  background: linear-gradient(to left, var(--accent), transparent);
+}
+
+/* Тикер: позицией управляет JS через transform, CSS-анимации нет */
+#ticker-text {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  line-height: var(--bar-h);
+  display: inline-block;
+  white-space: nowrap;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 1.9rem;
+  color: #000;
+  letter-spacing: 0.5px;
+  will-change: transform;
+}
+
+#ticker-text.empty-ticker {
+  position: static;
+  transform: none !important;
+  color: rgba(0,0,0,0.35);
+  font-style: italic;
+  font-weight: 400;
+  padding-left: 32px;
+}
+#empty {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  bottom: var(--bar-h);
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  color: rgba(255,255,255,0.3);
+}
+#empty.show { display: flex; }
+#empty p { font-size: 1rem; letter-spacing: 2px; text-transform: uppercase; }
+
